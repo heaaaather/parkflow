@@ -6,7 +6,6 @@ from firebase_admin import db, firestore, storage, auth
 from config import cred
 from flask_session import Session
 from datetime import datetime, timedelta
-from fpdf import FPDF
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
 
