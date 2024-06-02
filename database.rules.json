@@ -1,0 +1,24 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "tbl_staffaccount": {
+      ".indexOn": ["archived", "emailAddress", "staffID", "firstName", "lastName", "imagePath", "staffPosition"]
+    },
+    "tbl_logs": {
+      ".indexOn": ["actionTime", "actionLocation"]
+    },
+    "tbl_transactions": {
+      ".indexOn": ["logdate"]
+    },
+    "tbl_customerAcc": {
+      ".indexOn": ["fname", "lname", "email", "passcode", "license"]
+    },
+      "tbl_parking_entries": {
+      ".indexOn": ["entryDate", "plateNumber"]
+    },
+      "tbl_parking_exits": {
+      ".indexOn": ["exitDate", "plateNumber"]
+    }
+  }
+}

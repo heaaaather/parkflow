@@ -1,0 +1,9 @@
+firebase-admin
+firebase
+Flask
+Flask-Session
+ultralytics
+cv2
+easyocr
+Flask-Bcrypt
+pdfservices-sdk
