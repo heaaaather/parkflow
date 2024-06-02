@@ -7,3 +7,7 @@ cv2
 easyocr
 Flask-Bcrypt
 pdfservices-sdk
+python-dotenv
+opencv-python
+torch
+torchvision
