@@ -1,6 +1,6 @@
 firebase-admin==6.5.0
 Flask==3.0.3
-Flask-Session==0.8.0p
+Flask-Session==0.8.0
 ultralytics==8.2.22
 easyocr==1.7.1
 Flask-Bcrypt==1.0.1
