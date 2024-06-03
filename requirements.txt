@@ -9,3 +9,4 @@ opencv-python==4.9.0.80
 torch==2.3.0
 torchvision==0.18.0
 gunicorn==22.0.0
+pdfkit==1.0.0
