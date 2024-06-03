@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sta.Lucia East Grand Mall</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        *{
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+
+            /*STA.LU Colors*/
+            --stagold: #8C742E;
+            --stagreen: #2F4E22;
+            --stadark: #2B2F1F;
+            --stawhite1: #F9FBF7;
+            --stawhite2: #FFF2E8;
+            --lightergreen: #2F6922;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        header.headernav{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.6s;
+            padding: 40px 75px;
+            z-index: 10000;
+            background-color: #fff;
+            height: 100px;
+            padding-bottom:3vh;
+            background: #fff;
+            color: #000;
+        }
+
+        header.headernav.sticky{
+            background-color: #fff;
+            color: #000;
+        }
+
+        header.headernav .logo{
+            position: relative;
+            font-weight: 700;
+            color: #000;
+            text-decoration: none;
+            font-size: 2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.6s;
+        }
+
+        header.headernav ul{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header.headernav ul li{
+            position: relative;
+            list-style: none;
+        }
+
+        header.headernav ul li a{
+            position: relative;
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000;
+            letter-spacing: 2px;
+            font-weight: 500px;
+            transition: 0.5s;
+        }
+
+        .logout-btn, .login-btn {
+            width: 160px;
+            align-items: center;
+            background-color: var(--stagold);
+            border: 0;
+            border-radius: 150px;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            justify-content: center;
+            max-width: 480px;
+            min-height: 40px;
+            min-width: 0px;
+            overflow: hidden;
+            text-align: center;
+            touch-action: manipulation;
+            transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+            user-select: none;
+            -webkit-user-select: none;
+            vertical-align: middle;
+        }
+
+        .logout-btn:hover, .logout-btn:focus, .login-btn:hover, .login-btn:focus {
+            background-color: var(--stagreen);
+            color: #ffffff;
+        }
+
+        .banner{
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #fefefe;
+            background-size: cover;
+        }
+
+        header.sticky .logo,
+        header.sticky ul li a {
+            color: #000;
+        }
+
+        .stalu-logo{
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body style="background-color:#fff;">
+
+<header class="headernav">
+        <img src="./static/img/stalu_logo.png" class="stalu-logo">
+        <ul>
+            {% if logged_in %}
+                <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                <li> | </li>
+                <li><a href="#">Parking Map</a></li>
+                <li> | </li>
+                <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                <li> | </li>
+                <li><a href="{{ url_for('customer_profile') }}">Profile</a></li>
+            {% else %}
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li> | </li>
+                <li><a href="#">Parking Map</a></li>
+                <li> | </li>
+                <li><a href="{{ url_for('nologin_about_us') }}">About Us</a></li>
+            {% endif %}
+        </ul>
+
+        {% if logged_in %}
+            <form action="/logout_customer" method="post" style="text-align: right; padding: 10px;">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        {% else %}
+            <form action="/login_page_redirect" method="get" style="text-align: right; padding: 10px;">
+                <button type="submit" class="login-btn">Login | Signup</button>
+            </form>
+        {% endif %}
+    </header>
+
+    <script type="text/javascript">
+        window.addEventListener("scroll", function(){
+            var header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        })
+    </script>
+</body>
+</html>

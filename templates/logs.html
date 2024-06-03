@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Logs | ParkFlow</title>
+        <!--LINKS-->
+        <link rel="stylesheet" href="log.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--For the icons within the website, i.e., links-->
+        <script src="https://kit.fontawesome.com/1d4facf734.js" crossorigin="anonymous"></script>
+
+        <style>
+           @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Onest:wght@700&family=Work+Sans&display=swap');
+
+
+:root{
+    --white: #FEFEFE;
+    --porcelain: #EEF3F1;
+    
+    --chambray: #375A7E;
+    --greenpea: #236B51;
+    --milanored: #B80A12;
+    
+    --summergreen: #9EB9AE;
+    --gin: #E1EBE6;
+    --alizarincrimson: #EC3034;
+    --rosewood: #5B0301;
+    --milanored: #B80A12;
+  
+    /*STA.LU Colors*/
+    --stagold: #8C742E;
+    --stagreen: #2F4E22;
+    --stadark: #2B2F1F;
+    --stawhite1: #F9FBF7;
+    --stawhite2: #FFF2E8;
+    --lightergreen: #2F6922;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+    font-family: 'Poppins', sans-serif;
+    color: var(--black);
+}
+
+body {
+    background-color: var(--porcelain);
+}
+
+#idNums {
+    color: var(--burnt-sienna);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    background-color: var(--stagold);
+    z-index: 100;
+    transition: all 0.5s ease;
+}
+
+.sidebar.close {
+    width: 78px;
+}
+
+.sidebar .logo-details {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+}
+
+.h-line {
+    background-color: #1d1b31;
+    border: #1d1b31;
+    height: 2px;
+    opacity: 0.3;
+}
+
+
+
+.sidebar .logo-details i {
+    font-size: 26px;
+    color: var(--white);
+    height: 50px;
+    min-width: 68px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.sidebar .logo-details .logo-name {
+    font-family: 'Poppins', serif;
+    font-size: 24px;
+    color: var(--white);
+    text-transform: uppercase;
+    transition: 0.3s ease;
+    transition-delay: 0.1s;
+    white-space: nowrap;
+    font-weight: 600;
+    padding-left: 8px;
+}
+.sidebar.close .logo-details .logo-name {
+    transition-delay: 0s;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.sidebar .nav-links {
+    height: calc(100% - 140px);
+    padding-top: 20px 0 150px 0;
+    overflow-y: auto;
+}
+
+.sidebar.close .nav-links {
+    overflow: visible;
+}
+
+.sidebar .nav-links::-webkit-scrollbar {
+    display: none;
+}
+.sidebar .nav-links li.active {
+            background: var(--porcelain);
+            position: relative;
+            border-radius: 48px 0 0 48px;
+          }
+        .sidebar .nav-links li.active::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            top: -40px;
+            right: 0;
+            box-shadow: 20px 20px 0 var(--porcelain);
+            z-index: -1;
+         }
+        
+        .sidebar .nav-links li.active::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            bottom: -40px;
+            right: 0;
+            box-shadow: 20px -20px 0 var(--porcelain);
+            z-index: -1; 
+        }
+
+.sidebar .nav-links li {
+    list-style: none;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.sidebar .nav-links li:not(.profile-details) a:hover {
+             text-decoration: underline;
+            color: #fff;
+}
+
+
+.sidebar .nav-links li .iocn-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+.sidebar.close .nav-links li .iocn-link {
+    display: block;
+}
+
+.sidebar .nav-links li i {
+    height: 50px;
+    min-width: 82px;
+    text-align: center;
+    line-height: 50px;
+    color: var(--white);
+    font-size: 18px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.sidebar .nav-links .bx-notepad {
+    height: 50px;
+    min-width: 82px;
+    text-align: center;
+    line-height: 50px;
+    color: var(--lightergreen);
+    font-size: 18px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.sidebar .nav-links li.showMenu i.arrow {
+    transform: rotate(-180deg);
+}
+
+.sidebar.close .nav-links i.arrow {
+    display: none;
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    
+}
+
+.sidebar .nav-links li a .link-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+ }
+.sidebar .nav-links li a .link-logs {
+    font-size: 18px;
+    font-weight: 700;
+    color:var(--lightergreen);
+}
+.sidebar .nav-links li a .link-logs:hover {
+    text-decoration: underline;
+            color: var(--lightergreen);
+}
+
+
+.sidebar.close .nav-links li a .link-logs {
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar.close .nav-links li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar .nav-links li .sub-menu {
+             padding: 6px 6px 14px 84px;
+              background-color: var(--stagreen);
+              display: none;
+          }
+
+          .sidebar .nav-links li.showMenu .sub-menu {
+              display: block;
+          }
+
+          .sidebar .nav-links li .sub-menu li a {
+              color: var(--white);
+              font-size: 16px;
+              padding: 8px 0;
+              white-space: nowrap;
+              opacity: 0.6;
+              transition: all 0.3s ease;
+          }
+
+          .sidebar .nav-links li .sub-menu li a:hover {
+              opacity: 1;
+          }
+
+          .sidebar.close .nav-links li .sub-menu {
+              position: absolute;
+              left: 100%;
+              top: -10px;
+              margin-top: 0;
+              padding: 10px 20px;
+              border-radius: 0 6px 6px 0;
+              opacity: 0;
+              display: block;
+              pointer-events: none;
+              transition: 0s;
+          }
+
+.sidebar.close .nav-links li:hover .sub-menu {
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+}
+
+
+.sidebar .nav-links li .sub-menu .link-name {
+    display: none;
+}
+
+.sidebar.close .nav-links li .sub-menu .link-name {
+    display: none;
+}
+
+.sidebar.close .nav-links li .sub-menu .link-name {
+    font-size: 18px;
+    opacity: 1;
+    display: block;
+}
+
+.sidebar .nav-links li .sub-menu.blank {
+    opacity: 1;
+    pointer-events: auto;
+    padding: 6px 20px 9px 16px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar .nav-links li:hover .sub-menu.blank {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.sidebar .profile-details {
+    position: fixed;
+    bottom: 0;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--stagreen);
+    padding: 6px 0;
+    transition: all 0.5s ease;
+}
+.sidebar .profile-details .profile-name, .sidebar .profile-details .job {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+
+}
+.sidebar .profile-details .job{
+    font-size: 12px;
+    padding-left: 5px;
+    text-transform: capitalize;
+      
+
+}
+.sidebar.close .profile-details {
+  background: none;
+}
+
+.sidebar.close .profile-details {
+  width: 78px;
+}
+
+.sidebar .profile-details .profile-content {
+  display: flex;
+  align-items: center;
+  
+}
+
+.sidebar .profile-details img {
+    height: 48px;
+    width: 48px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 0 14px 0 12px;
+    background: #1d1b31;
+    padding: 4px;
+    transition: all 0.5s ease;
+}
+
+
+.sidebar .profile-name{
+  color: var(--white);
+  font-size: 20px;
+  margin: 0 5px 0 5%px;
+  padding: 6px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sidebar.close .profile-details i,
+.sidebar.close .profile-name, 
+.sidebar.close .profile-details .job {
+  display: none;
+}
+
+.sidebar .logout-class {
+  position: fixed;
+  bottom: 0;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  transition: all 0.5s ease;
+}
+.sidebar.close .logout-class {
+  background: none;
+}
+
+.sidebar.close .logout-class {
+  width: 78px;
+}
+.sidebar .logout-class .logout-content {
+  display: flex;
+  align-items: center;
+}
+.sidebar .logout-class .log-out{
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sidebar.close .logout-class {
+  display: none;
+}
+/***********************************/
+
+.home-section {
+    position: relative;
+    background-color: var(--porcelain);
+    left: 260px;
+    width: calc(100% - 260px);
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar.close ~ .home-section {
+    left: 78px;
+    width: calc(100% - 78px);
+}
+
+.home-section .home-content {
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.home-section .home-content .fa-bars,
+.home-section .home-content .text-title {
+    color: var(--stadark);
+    font-size: 36px;;
+}
+
+.home-section .home-content .fa-bars {
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.home-section .home-content .text-title {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.bxs-bell {
+    color: var(--rosewood);
+    font-size: 24px;
+    margin-right: 30px;
+}
+
+/*TABLE LAYOUT ----------*/
+
+.history-container {
+    position: relative;
+    background-color: var(--porcelain);
+    left: 260px;
+    width: calc(100% - 260px);
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sidebar.close ~ .history-container {
+    left: 78px;
+    width: calc(100% - 78px);
+}
+
+.doctors-table, .staff-table, .archived-staff-table, 
+.archived-supply-table {
+    background-color: rgba(255,255,255,0.8);
+    overflow: hidden;
+    width: 100%;
+    /*height: calc(100vh - 115px);*/
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+}
+
+#idColumn {
+    width: 50px;
+}
+
+#actionColumn, #StatColumn, #RPColumn {
+    width: 125px;
+}
+
+#QoHColumn {
+    width: 150px;
+}
+
+.table-layout {
+    margin: 20px;
+    table-layout: fixed;
+    display: table;
+    width: calc(100% - 40px);
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table-layout th, .table-layout td {
+    width: 25%;
+    padding: 8px;
+}
+
+.table-layout tr th {
+    background-color: var(--greenpea);
+    color: var(--white );
+}
+
+.table-layout tr td {
+    background-color: var(--porcelain);
+    text-align: center;
+}
+
+.table-layout tr:nth-child(odd) td {
+    background-color: var(--gin);
+}
+
+/*TOGGLE SWITCH*/
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 22px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--greenpea);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--rosewood);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/*SEARCH*/
+.searchNbtn {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchNbtn.staffPage {
+    justify-content: none;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+}
+
+.searchNbtn input {
+    padding: 8px 10px;
+    width: 350px;
+    border-radius: 5px;
+    border: 2px solid var(--greenpea);
+}
+
+.searchNbtn .bx-search {
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0 -30px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+         
+            .pagination {
+                margin-top: 5px;
+                margin-bottom: 15px;
+            }
+
+            .pagination a {
+                display: inline-block;
+                padding: 8px 16px;
+                text-decoration: none;
+                color: #000;
+                background-color: #E8BA4E;
+                border-radius: 5px;
+                margin: 0 5px;
+            }
+
+
+            .pagination a:hover {
+                background-color: #C98F0A;
+            }
+           
+            .doctors-table table tr.hidden {
+                display: none;
+            }
+            .pagination {
+                display: flex;
+                justify-content: center;
+            }
+
+            .pagination a.active {
+                background-color: var(--stagold);
+                color: white;
+                border-radius: 5px;
+            }
+            .fa-sort {
+                padding: 0 7px;
+                font-size: 14px;
+                color: #363636;
+                cursor: pointer;
+            }
+            .filter-text{
+                color: white;
+                font-weight: 600;
+            }
+            .bx-filter{
+                color: white;
+            }
+/**FILTER MODAL */
+.filter-modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.filter-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 15%;
+}
+.filter-modal-content h2 {
+        color: var(--stagreen);
+ }
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.filter-modal-body {
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.filter-option {
+    margin-bottom: 10px;
+    
+}
+.filter-option select {
+    border: 2px solid  #DEA00C;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.filter-option label {
+    margin-right: 10px;
+  
+}
+.filter-button{
+        padding: 8px 10px;
+        border-radius: 3px;
+        background-color:  #DEA00C;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-left: auto;
+}
+.apply-button {
+         display: block;
+        margin: 0 auto; 
+        padding: 10px 20px;
+        background-color: #DEA00C;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    /**For generate pdf button */
+    .generate-pdf input[type="submit"] {
+                padding: 8px 10px;
+                color: white;
+                background-color: #DEA00C;;
+                border-radius: 3px;
+                border: none;
+                cursor: pointer;
+                width: 120px;
+                margin: 10px;
+                    font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="sidebar">
+            <div class="logo-details">
+            <i class="fas fa-car"></i>
+                    <span class="logo-name">ParkFlow</span>
+                </div><!--end of upper portion-->
+
+                <ul class="nav-links">
+                    <li ><!--Dashboard-->
+                        <a href="{{ url_for('dashboard') }}">
+                        <i class="bx bxs-dashboard"></i>
+                        <span class="link-name">Dashboard</span> 
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Parking Management-->
+                        <a href="{{ url_for('parking_entry') }}">
+                        <i class='bx bxs-parking'></i>
+                            <span class="link-name">Parking</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('parking_entry') }}">Parking</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Parking Map-->
+                        <a href="{{ url_for('map') }}">
+                        <i class='bx bxs-map' ></i>
+                            <span class="link-name">Map</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('map') }}">Map</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Activity-->
+                        <a href="{{ url_for('parking_activity') }}">
+                        <i class="bx bx-run"></i>
+                            <span class="link-name">Activity</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('parking_activity') }}">Activity</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--History-->
+                        <a href="{{ url_for('history_transactions') }}">
+                        <i class="bx bx-history"></i>
+                            <span class="link-name">Transaction</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('history_transactions') }}">Transaction</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Rates-->
+                        <a href="{{ url_for('sales') }}">
+                        <i class="bx bx-line-chart-down"></i>
+                            <span class="link-name">Sales</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('sales') }}">Sales</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Staff Account-->
+                        <a href="{{ url_for('staff_users') }}">
+                        <i class='bx bxs-group' style='color:#ffffff' ></i>
+                            <span class="link-name">Staff Account</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('staff_users') }}">Staff Account</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Archive-->
+                            <a href="{{ url_for('archives') }}">
+                            <i class="bx bx-bar-chart"></i>
+                                <span class="link-Archive">Archive</span>
+                            </a>
+                            <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('archives') }}">Archive</a></li>
+                    </ul> 
+                    </li>
+
+                    <li class="active"><!--Logs-->
+                            <a href="{{ url_for('logs_page') }}">
+                            <i class="bx bx-notepad"></i>
+                                <span class="link-name">Logs</span>
+                            </a> 
+                            <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('logs_page') }}">Logs</a></li>
+                    </ul> 
+                    </li>
+
+                    <li><!--Profile-->
+                            <a href="{{ url_for('user_profile') }}">
+                                <i class='bx bx-user' ></i>
+                                <span class="link-name">Profile</span>
+                            </a>
+                            <ul class="sub-menu blank">
+                        <li><a class="link-name" href="{{ url_for('user_profile') }}">Profile</a></li>
+                    </ul> 
+                    </li>
+
+                    <li>
+                        <div class="profile-details">
+                            <div class="profile-content">
+                                <img src="{{ image_url }}" title="Profile Image">
+                            </div>
+                            <div class="name-job">
+                                {% if staff_info %}
+                                    <div class="profile-name">{{ staff_info.get('firstName', '') }} {{ staff_info.get('lastName', '') }}</div>
+                                    <div class="job">{{ staff_info.get('staffPosition', '') }}</div>
+                                {% endif %}
+                            </div>
+                            <a href="{{ url_for('logout_staff') }}"><i class='bx bx-log-out' ></i></a>
+                        </div>
+                    </li>
+            </ul>
+        </div><!--end of sidebar-->
+                    
+    
+            <section class="home-section">
+                <div class="home-content">
+                    <i class="fa-solid fa-bars"></i>
+                    <span class="text-title">Logs</span>
+                </div>
+            </section>
+
+            <div class="history-container">
+                <div class="staff-table">
+                    <div class="searchNbtn staffpage">
+                        <input type="search" placeholder="Search here..." name="search-doctor" id="search">
+                        <i class='bx bx-search' >
+                        </i>
+                        <!--FILTER BUTTON-->   
+                        <button id="filterButton" class="filter-button">
+                            <i class='bx bx-filter'></i>
+                            <span class="filter-text">Filter</span>   
+                        </button>
+                                <!--Generate PDF BUTTON-->
+                        <div class="generate-pdf">
+                        <form action="" method="post" target="_blank">
+                            <input type="submit" name="generate-pdf" value="Generate PDF">
+                        </form> 
+                    </div>
+                </div>
+
+                <table class="table-layout">
+                    <thead>
+                        <tr>
+                            <th>Log ID</th>
+                            <th>Staff Name</th>
+                            <th>Action Tab</th>
+                            <th>Action Message</th>
+                            <th>Action Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if logs %}
+                            {% for log_id, log in logs.items() %}
+                                <tr>
+                                    <td>{{ log_id }}</td>
+                                    <td>{{ staff_name }}</td>
+                                    <td>{{ log.get('actionLocation', '') }}</td>
+                                    <td>{{ log.get('actionMessage', '') }}</td>
+                                    <td>{{ log.get('actionTime', '') }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5">No logs found.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                
+                <!-- Display pagination links -->
+                <div class="pagination">
+                    {{ logs_pagination | safe }}  <!-- Use safe filter to render HTML safely -->
+                </div>
+            </div>
+        </div>
+
+    <!--FILTER MODAL-->
+    <div id="filterModal" class="filter-modal">
+        <div class="filter-modal-content">
+            <span class="close">&times;</span>
+            <h2>Filter</h2>
+            <div class="filter-modal-body">
+                <div class="filter-option">
+                    <label for="filterActionTab">Action Tab:</label>
+                    <select id="filterActionTab">
+                        <option value="">All Action Tab</option>
+                        <?php foreach ($actionLocation as $location): ?>
+                            <option value="<?php echo $location; ?>"><?php echo $location; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button onclick="applyFilter()" class="apply-button">Apply Filter</button>
+            </div>
+        </div>
+    </div>
+
+
+<!--Javascript-->
+<script src="notification-bell.js"></script>
+        <script>
+            let arrow = document.querySelectorAll(".arrow");
+
+            for (var i = 0; i < arrow.length; i++) {
+                arrow[i].addEventListener("click", (e)=>{
+                    let arrowParent = e.target.parentElement.parentElement;
+                    console.log(arrowParent);
+
+                    arrowParent.classList.toggle("showMenu");
+                });
+            }
+
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".fa-bars");
+            console.log(sidebarBtn);
+            
+            sidebarBtn.addEventListener("click", ()=>{
+                    sidebar.classList.toggle("close");
+            });
+
+            function toggleStatus(checkbox) {
+                // Get the staff ID from the data attribute
+                var staffID = checkbox.dataset.staffId;
+                // Determine the new activeStatus value based on the checkbox state
+                var newStatus = checkbox.checked ? 1 : 0;
+            
+                // Send an AJAX request to update the activeStatus in the database
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "update_status.php", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // You can handle the response if needed
+                        console.log(xhr.responseText);
+                    }
+                };
+                xhr.send("staffID=" + staffID + "&newStatus=" + newStatus);
+            }
+
+            //search
+            document.addEventListener('DOMContentLoaded', function () {
+            var searchInput = document.getElementById('search');
+            var tableRows = document.querySelectorAll('#logTable tr');
+
+            searchInput.addEventListener('input', function () {
+                var searchTerm = searchInput.value.toLowerCase();
+
+                tableRows.forEach(function (row, index) {
+                    // Skip the first row (headers)
+                    if (index === 0) return;
+
+                    var rowData = row.innerText.toLowerCase();
+
+                    if (rowData.includes(searchTerm)) {
+                        row.classList.remove('hidden');
+                    } else {
+                        row.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Handle the case where the search input is cleared
+            searchInput.addEventListener('change', function () {
+                if (searchInput.value === '') {
+                    tableRows.forEach(function (row) {
+                        row.classList.remove('hidden');
+                    });
+                }
+            });
+        });
+
+        var ascending = true;
+
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.querySelector('.table-layout');
+            switching = true;
+            
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                
+                for (i = 1; i < rows.length - 1; i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+                    
+                    if (ascending) {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+            
+            ascending = !ascending;
+        }
+function applyFilter() {
+    var selectedActionTab = document.getElementById('filterActionTab').value.toLowerCase();
+    
+    // Get all table rows
+    var tableRows = document.querySelectorAll('.table-layout tr');
+
+    // Loop through each row
+    tableRows.forEach(function(row, index) {
+        if (index === 0) return; // Skip header row
+
+        // Get action tab data from the row (assuming action tab is in the 3rd column)
+        var actionTabData = row.getElementsByTagName('td')[3].innerText.toLowerCase();
+
+        // Show or hide the row based on the filter
+        if (selectedActionTab === "" || actionTabData.includes(selectedActionTab)) {
+            row.style.display = ""; // Show row
+        } else {
+            row.style.display = "none"; // Hide row
+        }
+    });
+}
+
+            // Get the modal
+            var modal = document.getElementById("filterModal");
+            // Get the button that opens the modal
+            var btn = document.getElementById("filterButton");
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+            // When the user clicks the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+    </body>
+</html>

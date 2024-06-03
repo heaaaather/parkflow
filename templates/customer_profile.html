@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Profile | Parkflow</title>
+
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap');
+    
+        *{
+            font-family: 'Poppins', sans-serif;
+            /*STA.LU Colors*/
+            --stagold: #8C742E;
+            --stagreen: #2F4E22;
+            --stadark: #2B2F1F;
+            --stawhite1: #F9FBF7;
+            --stawhite2: #FFF2E8;
+            --lightergreen: #2F6922;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            height: 20vh;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            background: linear-gradient(90deg, rgba(255,247,225,1) 9%, rgba(255,255,255,1) 47%, rgba(239,255,232,1) 88%);
+        }
+
+        .card{
+            font-family: "Poppins", "Roboto", sans-serif;
+            width: 340px;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            max-height: 47vh;
+        }
+
+        .card-image img{
+            width: 100%;
+            height: 160px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            object-fit: cover;
+        }
+
+        .ci-user-header img{
+
+        }
+
+        .ci-user-header .header-overlay{
+            position: absolute;
+            margin-top: -160px;
+            background: rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 160px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            object-fit: cover;
+            color: white;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+            padding-left: 15px;
+            padding-top: 10px;
+        }
+
+        .ci-user-header:hover img {
+            filter: brightness(50%);
+        }
+
+        .ci-user-header:hover .header-overlay {
+            opacity: 1;
+        }
+
+        .ci-user-picture {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .ci-user-picture img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: filter 0.3s;
+
+            position: relative;
+            margin-top: -75px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 100px;
+            border: 10px solid #fff;
+            transition-duration: 0.4s;
+        }
+
+        .ci-user-picture .overlay {
+            position: absolute;
+            margin-top: -75px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .ci-user-picture:hover img {
+            filter: brightness(50%);
+        }
+
+        .ci-user-picture:hover .overlay {
+            opacity: 1;
+        }
+
+        .filepreviewprofile {
+            display: none;
+        }
+
+        .card-content h3{
+            font-size: 25px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .card-content p{
+            font-family: "Robot", sans-serif;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .cstmr-history{
+            margin-top:20px;
+        }
+
+        .lbl-history h1{
+            font-size: 50px;
+            margin-left: 20px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .profile-all{
+            margin-top: 80vh;
+            width: 75%;
+        }
+
+        .table-layout {
+            width: 100%;
+            border-collapse: collapse;
+            margin-left: 10px;
+        }
+
+        .table-layout th, .table-layout td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .table-layout th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        .btnpdf {
+            background-color: var(--stagreen);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btnpdf:hover {
+            background-color: var(--lightergreen);
+        }
+
+        .table-layout{
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .table-layout tr th{
+            background-color: var(--stagold);
+            width: 150px;
+            
+            color: #fff;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .table-layout tr td{
+            background-color: #fff;
+            width: 150px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prfl-content{
+            display: inline-flex;
+        }
+
+        .prfl-content .card,
+        .prfl-content .cstmr-history{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .button-3 {
+            appearance: none;
+            background-color: var(--lightergreen);
+            border: 1px solid rgba(27, 31, 35, .15);
+            border-radius: 6px;
+            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            padding: 6px 13px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            white-space: nowrap;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-left: 2px;
+            margin-right: 2px;
+            }
+
+            .button-3:focus:not(:focus-visible):not(.focus-visible) {
+            box-shadow: none;
+            outline: none;
+            }
+
+            .button-3:hover {
+            background-color: #2c974b;
+            }
+
+            .button-3:focus {
+            box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+            outline: none;
+            }
+
+            .button-3:disabled {
+            background-color: #94d3a2;
+            border-color: rgba(27, 31, 35, .1);
+            color: rgba(255, 255, 255, .8);
+            cursor: default;
+            }
+
+            .button-3:active {
+            background-color: #298e46;
+            box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+            }
+
+            .profile-all{
+                height: 50vh;
+            }
+
+            .addplate, .modifyplate{
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                transition: opacity 500ms;
+                visibility: hidden;
+                opacity: 0;
+            }
+
+            .addplate:target, .modifyplate:target{
+                visibility: visible; 
+                opacity: 1;
+            }
+
+            .editInfo{
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                transition: opacity 500ms;
+                visibility: hidden;
+                opacity: 0;
+            }
+
+            .editInfo:target{
+                visibility: visible; 
+                opacity: 1;
+            }
+
+            .wrapper{
+                margin: 70px auto;
+                padding: 20px;
+                background: #e7e7e7;
+                border-radius: 5px;
+                width: 30%;
+                position: relative;
+                transition: all 5s ease-in-out;
+                margin-top: 40vh;
+            }
+
+            .wrapper h2{
+                margin-top: 0;
+                color: #333;
+            }
+
+            .wrapper .close{
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                transition: all 200ms;
+                font-size: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .wrapper .addContent{
+                max-height: 30%;
+                overflow: auto;
+            }
+
+            .wrapper-info{
+                margin: 70px auto;
+                padding: 20px;
+                background: #e7e7e7;
+                border-radius: 5px;
+                width: 30%;
+                position: relative;
+                transition: all 5s ease-in-out;
+                margin-top: 27vh;
+            }
+
+            .wrapper-info h2{
+                margin-top: 0;
+                color: #333;
+            }
+
+            .wrapper-info .close{
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                transition: all 200ms;
+                font-size: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .wrapper-info .addContent{
+                max-height: 30%;
+                overflow: auto;
+            }
+
+            .addContainer{
+                border-radius: 5px;
+                background-color: #e7e7e7;
+                padding: 20px 0;
+            }
+
+            form label{
+                text-transform: uppercase;
+                font-weight: 500;
+                letter-spacing: 1px;
+            }
+
+            input[type="text"], select{
+                width: 100%;
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-bottom: 12px;
+                padding-top: 8px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+                margin-top: 3px;
+                margin-bottom: 16px;
+                resize: vertical;
+            }
+
+            .fa-square-pen{
+                font-size: 44px;
+                margin-left: 5px;
+            }
+
+            input[type="submit"]{
+                background-color: var(--stagold);
+                color: #fff;
+                padding: 15px 50px;
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                font-size: 15px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+
+            .cropImageModal .modal-dialog {
+            max-width: 750px;
+            width: 90%;
+            margin: 0.5rem auto;
+            padding-top: 25vh;
+            justify-content: center;
+            align-items:center;
+            align-content: center;
+            }
+
+            .modal-header-bg {
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(269.44deg, #006AFA 2.3%, #00AE86 99.19%);
+        }
+
+        .cropImageModal .modal-dialog {
+            max-width: 750px;
+            width: 90%;
+            margin: 0.5rem auto;
+        }
+        .up-photo-title {
+            padding: 8px 15px;
+            text-align: center;
+        }
+        #upload-demo {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            padding-bottom: 0;
+        }
+
+        #upload-header {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            padding-bottom: 0;
+        }
+
+        .croppie-container h5 {
+            position: absolute;
+            bottom: 4px;
+            text-align: center;
+            left: 0;
+            right: 0;
+            color: #fff;
+            z-index: 2;
+            font-size: 15px;
+        }
+        figure figcaption {
+            position: absolute;
+            bottom: 0;
+            color: #fff;
+            width: 100%;
+            padding-left: 9px;
+            padding-bottom: 5px;
+            text-shadow: 0 0 10px #000;
+        }
+        .croppie-container .cr-image {
+            right: 0;
+        }
+        .croppie-container .cr-slider-wrap {
+            width: 275px;
+        }
+        .cr-slider-wrap p {
+            font-size: 13px;
+            color: #8D8D94;
+            text-align: left;
+        }
+        .cr-slider {
+            width: 275px;
+        }
+        .upload-action-btn {
+            margin-top: 60px;
+            padding-top: 40px;
+        }
+        .cr-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #006AFA;
+            cursor: pointer;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+        }
+        .cr-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #006AFA;
+            cursor: pointer;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+        }
+        .cr-slider::-ms-thumb {
+            width: 18px;
+            height: 18px;
+            background: #006AFA;
+            cursor: pointer;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+        }
+        .cr-slider::-webkit-slider-runnable-track {
+            width: 275px;
+            height: 2px;
+            cursor: pointer;
+            box-shadow: none;
+            background: #E0E0E0;
+            border-radius: 3px;
+            border: none;
+        }
+        .cr-slider:focus::-webkit-slider-runnable-track {
+            background: #E0E0E0;
+        }
+        .cr-slider::-moz-range-track {
+            width: 275px;
+            height: 2px;
+            cursor: pointer;
+            box-shadow: none;
+            background: #E0E0E0;
+            border-radius: 3px;
+            border: none;
+        }
+        .cr-slider::-ms-track {
+            width: 275px;
+            height: 2px;
+            cursor: pointer;
+            box-shadow: none;
+            background: #E0E0E0;
+            border-radius: 3px;
+            border: none;
+            color: transparent;
+        }
+
+        .button-87 {
+            padding: 15px 30px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            border-radius: 10px;
+            border: 0px;
+            font-weight: 700;
+            box-shadow: 0px 0px 14px -7px #f09819;
+            background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-87:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .button-87:active {
+         transform: scale(0.95);
+        }
+
+        .ayaw-pumantay{
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        .license-edit{
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            border-radius: 5px;
+            transition-property: background-color,border-color,color,box-shadow,filter;
+            transition-duration: .3s;
+            border: 1px solid transparent;
+            letter-spacing: 2px;
+            min-width: 60px;
+            text-transform: uppercase;
+            white-space: normal;
+            text-align: center;
+            padding: 16px 14px 18px;
+            color: #fff;
+            background-color: var(--stagreen);
+            height: 48px;  
+        }
+
+        .license-edit:hover{
+            background-color: #2F6922;
+        }  
+
+        .fa-user-pen{
+            color:#a9a9a9;
+            margin-right: 7px;
+            font-size: 22px;
+        }
+
+        .fa-user-pen:hover{
+            color: #989898;
+        }
+
+        .modal-tix {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content-tix {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: max-content;
+        }
+
+        .close-tix {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-tix:hover,
+        .close-tix:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-tix h2{
+            font-family: "Poppins", "Roboto", sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            width: max-content;
+        }
+
+        .modal-tix p{
+            margin-top: -7px;
+        }
+
+        .tix-heading {
+            display: flex;
+            align-items: center;
+        }
+
+        .tix-heading img{
+            margin-right: 5px;
+        }
+
+        .tix-heading h2 {
+            margin: 0; /* Remove default margin */
+        }
+
+    </style> 
+</head>
+
+<body>
+    <!-- Include your navigation bar -->
+    {% include "navibar.html" %}
+
+<div class="profile-all">
+
+    <div class="lbl-history">
+        <h1>User Profile</h1>
+    </div>
+
+
+    <div class="prfl-content">
+        <div class="card">
+
+            <!-- .....FOR HEADER..... -->
+
+            <form id="headerUploadForm" enctype="multipart/form-data" method="post" action="{{ url_for('upload_header') }}">
+                <div class="card-image ci-user-header">
+                    <label for="header-input" id="header-banner-container">
+                        <!-- Display the header banner -->
+                        <img src="{{ header_banner }}" alt="Header Banner">
+                        <div class="header-overlay"><i class="fa-solid fa-pen-to-square"></i>Change header</div>
+                    </label>
+                    <input type="file" class="item-img file filepreviewprofile" id="header-input" name="header_pic">
+                </div>
+            </form>
+            
+
+            <!-- .....FOR PROFILE PHOTO..... -->
+
+                <center style='height:18%;'>
+
+                    <form id="imageUploadForm" enctype="multipart/form-data" method="post" action="{{ url_for('upload_image') }}">
+                        <div class="profile-image ci-user-picture">
+                            <label for="profile-picture-input" id="profile-picture-container">
+                                <!-- Display the profile picture -->
+                                <img src="{{ profile_picture }}" alt="Profile Picture">
+                                <div class="overlay">Update Image</div>
+                            </label>
+                            <input type="file" class="item-img file filepreviewprofile" id="profile-picture-input" name="profile_picture">
+                        </div>
+                    </form>
+                    
+
+                </center>
+
+                <div class="card-content">
+                    <div class="user-information">
+                        <h3>
+                            <a href="#editInfo"><i class="fa-solid fa-user-pen"></i></a>
+                            Hi, {{ user_data.get('fname', '') }}!
+                        </h3>
+                    </div>
+                    <center>
+                        {% if user_data %}
+                            {% if 'license' in user_data %}
+                                <p>License Plate: 
+                                    {% if user_data['license'] %}
+                                        {{ ''.join(user_data['license']) }}
+                                    {% else %}
+                                        No license plates found.
+                                    {% endif %}
+                                </p>
+                            {% else %}
+                                <p>No license plates found.</p>
+                            {% endif %}
+                            <p>Email: {{ user_data.get('email', '') }}</p>
+                        {% else %}
+                            <p>No user data found.</p>
+                        {% endif %}
+                    </center>
+                    <center>
+                        <a href="#addplate"><button class="button-3">Add License Plate</button></a>
+                        <a href="#modifyplate"><button class="button-3">Edit License Plate</button></a>
+                    </center>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+
+            <!-- .....[PROFILE PICTURE] CROP IMAGE MODAL..... -->
+
+            <div class="modal fade cropImageModal" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body p-0">
+                            <div class="modal-header-bg"></div>
+                            <div class="up-photo-title">
+                                <h3 class="modal-title">Update Profile Photo</h3>
+                            </div>
+                            <div class="up-photo-content pb-5">
+                                <div id="upload-demo" class="center-block">
+                                    <h5><i class="fas fa-arrows-alt mr-1"></i> Drag your photo as you require</h5>
+                                </div>
+                                <div class="upload-action-btn text-center px-2">
+                                    <button type="button" id="cropImageBtn" class="button-87 btn btn-default btn-medium bg-blue px-3 mr-2">Save Photo</button>
+                                    <button type="button" class="button-87 btn btn-default btn-medium px-3 ml-sm-2 replacePhoto position-relative">Replace Photo</button>
+                                    <button type="button" class="button-87 btn btn-default btn-medium px-3 ml-sm-2" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .....END OF CROP MODAL..... -->
+
+            <!-- Ensure the button outside the form triggers form submission -->
+            <button type="submit" id="submitForm" style="display: none;"></button>
+
+            <!-- .....[HEADER] CROP IMAGE MODAL..... -->
+
+            <div class="modal fade cropImageModal" id="cropHeaderPop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body p-0">
+                            <div class="modal-header-bg"></div>
+                            <div class="up-photo-title">
+                                <h3 class="modal-title">Update Header</h3>
+                            </div>
+                            <div class="up-photo-content pb-5">
+                                <div id="upload-header" class="center-block">
+                                    <h5><i class="fas fa-arrows-alt mr-1"></i> Drag your photo as you require</h5>
+                                </div>
+                                <div class="upload-action-btn text-center px-2">
+                                    <button type="button" id="cropHeaderBtn" class="button-87 btn btn-default btn-medium bg-blue px-3 mr-2">Save Photo</button>
+                                    <button type="button" class="button-87 btn btn-default btn-medium px-3 ml-sm-2 replaceHeader position-relative">Replace Photo</button>
+                                    <button type="button" class="button-87 btn btn-default btn-medium px-3 ml-sm-2" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .....END OF CROP MODAL..... -->
+
+            <!-- Ensure the button outside the form triggers form submission -->
+            <button type="submit" id="submitHeader" style="display: none;"></button>
+
+            <!-- .....ADD PLATE NUMBER POP UP..... -->
+
+            <!-- Add license plate form -->
+            <form action="{{ url_for('add_plate') }}" method="POST" class="addingPlate" id="addingPlate">
+                <label>License Plate Number</label>
+                <input type="text" name="plate_number" placeholder="Enter plate number here" required>
+                <center><input type="submit" value="Confirm" name="submitPlate"></center>
+            </form>
+
+            <!-- Edit user information form -->
+            <form action="{{ url_for('add_plate') }}" method="POST" class="addingPlate" id="editProfileForm">
+                <!-- Include fields for editing user information -->
+                <center><input type="submit" value="Confirm" name="confirmChanges"></center>
+            </form>
+
+            <!-- Edit license plate form -->
+            <form action="{{ url_for('update_license') }}" method="POST" class="addingPlate" id="modifyPlateForm">
+                <select id="lplate_edit" name="lplate_edit" onchange="showInputField()">
+                    <option value="">Select License Plate</option>
+                    {% for license in session['license'] %}
+                        <option value="{{ license }}">{{ license }}</option>
+                    {% endfor %}
+                </select>
+                <div id="newPlateField" style="display:none; margin-top: 10px;">
+                    <label for="new_plate">Enter updated license plate:</label>
+                    <input type="text" id="new_plate" name="new_plate" placeholder="Enter new license plate" required>
+                </div>
+                <center><input type="submit" value="Confirm" name="updatePlate"></center>
+            </form>
+
+            
+            <script>
+            function showInputField() {
+                const selectedPlate = document.getElementById('lplate_edit').value;
+                const newPlateField = document.getElementById('newPlateField');
+                if (selectedPlate) {
+                    newPlateField.style.display = 'block';
+                } else {
+                    newPlateField.style.display = 'none';
+                }
+            }
+            </script>
+        </div>
+
+        <div class="cstmr-history">
+            <div class="tbl-history">
+                <table class='table-layout'>
+                    <tr>
+                        <th>Plate Number</th>
+                        <th>Owner Name</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Total Fee</th>
+                        <th>Date</th>
+                        <th>Ticket</th>
+                    </tr>
+                    {% for entry_data in entry_transactions %}
+                    <tr>
+                        <td>{{ entry_data.license_plate }}</td>
+                        <td>{{ entry_data.customer_name }}</td>
+                        <td>{{ entry_data.entry_time }}</td>
+                        <td>{{ entry_data.exit_time }}</td>
+                        <td>Php {{ entry_data.total_fee }}0</td>
+                        <td>{{ entry_data.entry_date }}</td>
+                        <td>
+                            <button class='btnpdf btn-danger' onclick='openModal("{{ entry_data.license_plate }}", "{{ entry_data.customer_name }}", "{{ entry_data.entry_time }}", "{{ entry_data.exit_time }}", "{{ entry_data.total_fee }}", "{{ entry_data.entry_date }}")'>
+                                View
+                            </button>                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <!-- Modal Structure -->
+                <div id="infoModal" class="modal-tix" style="display:none;">
+                    <div class="modal-content-tix">
+                        <span class="close-tix" onclick="closeModal()">&times;</span>
+                        
+                        <div class="tix-heading">
+                            <img src="./static/img/stalu_logo.png" style="height: 50px; width: auto;">
+                            <h2>Parking Details</h2>
+                        </div>
+
+                        <hr>
+
+                        <p><strong>Plate Number:</strong> <span id="modalPlateNumber"></span></p>
+                        <p><strong>Owner Name:</strong> <span id="modalOwnerName"></span></p>
+                        <p><strong>Time In:</strong> <span id="modalTimeIn"></span></p>
+                        <p><strong>Time Out:</strong> <span id="modalTimeOut"></span></p>
+                        <p><strong>Total Fee:</strong> <span id="modalTotalFee"></span></p>
+                        <p><strong>Date:</strong> <span id="modalDate"></span></p>
+
+                        <hr>
+
+                        <p style="margin-top:5px; margin-bottom:0px;"><strong>Fees are paid upon exit. Thank you.</p>
+                    </div>
+                </div>
+
+                <script>
+                function openModal(plateNumber, ownerName, timeIn, timeOut, totalFee, date) {
+                    document.getElementById('modalPlateNumber').innerText = plateNumber;
+                    document.getElementById('modalOwnerName').innerText = ownerName;
+                    document.getElementById('modalTimeIn').innerText = timeIn;
+                    document.getElementById('modalTimeOut').innerText = timeOut;
+                    document.getElementById('modalTotalFee').innerText = totalFee;
+                    document.getElementById('modalDate').innerText = date;
+                    document.getElementById('infoModal').style.display = 'block';
+                }
+                    
+
+                function closeModal() {
+                    document.getElementById('infoModal').style.display = 'none';
+                }
+                </script>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- javscripts -->
+<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js'></script>
+
+<script>
+$(document).ready(function () {
+    // Function to read file input
+    function readFile(input, callback) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                callback(e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            console.log("Sorry - your browser doesn't support the FileReader API");
+        }
+    }
+
+    // Function to handle file upload
+    function uploadImage(file, callback) {
+        // Modify this part to upload the file to Firebase Storage
+        // Here's a placeholder code for demonstration
+        // Replace it with Firebase Storage upload logic
+        var storageRef = firebase.storage().ref();
+        var uploadTask = storageRef.child('images/' + file.name).put(file);
+
+        uploadTask.on('state_changed', function(snapshot){
+            // Track upload progress if needed
+        }, function(error) {
+            console.error('Error uploading image', error);
+            callback(error, null);
+        }, function() {
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                callback(null, downloadURL);
+            });
+        });
+    }
+
+    // Trigger file input click when container is clicked
+    $('#profile-picture-container').on('click', function () {
+        $('#file-input').trigger('click');
+    });
+
+    // Handle profile picture upload
+    $('#file-input').on('change', function () {
+        readFile(this, function(result) {
+            $('#item-img-output').attr('src', result); // Update src attribute with uploaded image
+            uploadImage(this.files[0], function(error, downloadURL) {
+                if (error) {
+                    console.error('Error uploading image', error);
+                } else {
+                    console.log('Profile picture uploaded successfully:', downloadURL);
+                    // Update the profile picture URL in the database or do further processing
+                }
+            });
+        });
+    });
+
+    // Trigger file input click when container is clicked
+    $('#header-banner-container').on('click', function () {
+        $('#header-input').trigger('click');
+    });
+
+    // Handle header banner upload
+    $('#header-input').on('change', function () {
+        readFile(this, function(result) {
+            $('#header-banner-output').attr('src', result); // Update src attribute with uploaded image
+            uploadImage(this.files[0], function(error, downloadURL) {
+                if (error) {
+                    console.error('Error uploading image', error);
+                } else {
+                    console.log('Header banner uploaded successfully:', downloadURL);
+                    // Update the header banner URL in the database or do further processing
+                }
+            });
+        });
+    });
+});
+</script>
+
+</body>
+</html>
