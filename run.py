@@ -398,7 +398,7 @@ def customer_profile():
 
     return render_template('customer_profile.html', user_data=user_data, entry_transactions=entry_transactions, logged_in=session.get('logged_in', False))
 
-@app.route('about')
+@app.route('/about')
 def about():
     return render_template('about.html')
 
